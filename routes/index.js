@@ -90,6 +90,23 @@ router.post('/login', function(req, res, next) {
   }
 })
 
+//GET Profile
+router.get('/profile', function( req, res, next) {
+  if (! req.session.userId) {
+    var err = new Error('Please login to view this page');
+    err.status = 403;
+    return next(err);
+  }
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        return res.render('profile', {title: 'Profile', name: user.name, email: user.email, points: user.points, createdAt: user.createdAt})
+      }
+    })
+})
+
 //GET about page
 router.get('/about', function(req, res, next) {
   res.render('about', { title: "About"});
