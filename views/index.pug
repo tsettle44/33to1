@@ -4,6 +4,9 @@ block content
   .main.container.text-xs-center
     h1.display-3 Welcome to 33TO1
     p.lead Every April, 33 teams take the Little 500 track. But only 1 is a champion.
-    a.btn.btn-info-outline.btn-lg(href='/register') Sign Up
+    if !currentUser
+      a.btn.btn-info-outline.btn-lg(href='/register') Sign Up
+    else
+    
 
 

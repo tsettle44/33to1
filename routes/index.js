@@ -51,6 +51,20 @@ router.post('/register', function(req, res, next) {
     }
 });
 
+//GET /logout
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    //delete session
+    req.session.destroy(function(err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    })
+  }
+})
+
 //GET about page
 router.get('/about', function(req, res, next) {
   res.render('about', { title: "About"});
